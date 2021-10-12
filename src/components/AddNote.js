@@ -3,7 +3,7 @@ import noteContext from "../context/notes/noteContext";
 
 export default function AddNote(props) {
   const context = useContext(noteContext);
-  const { addNote } = context;
+  const { addNote, userDetails } = context;
 
   const [note, setNote] = useState({
     title: "",
@@ -21,6 +21,16 @@ export default function AddNote(props) {
   };
   return (
     <div>
+      {localStorage.getItem("token") ? (
+        <h4>
+          {" "}
+          <b>Name:</b>
+          {userDetails.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Email:</b>{" "}
+          {userDetails.email}{" "}
+        </h4>
+      ) : (
+        ""
+      )}
       <h1 className="my-2">Add a note</h1>
       <form>
         <div className="mb-3">

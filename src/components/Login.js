@@ -68,7 +68,7 @@ export default function Login(props) {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Submit
+          Login
         </button>
       </form>
     </div>

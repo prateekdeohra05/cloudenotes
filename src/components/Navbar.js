@@ -4,7 +4,7 @@ import noteContext from "../context/notes/noteContext";
 
 export default function Navbar() {
   const context = useContext(noteContext);
-  const { userDetails, getUser } = context;
+  const { getUser } = context;
 
   let history = useHistory();
 
@@ -26,13 +26,8 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          {localStorage.getItem("token") ? (
-            <span className="text-light">
-              {userDetails.name} &nbsp;&nbsp;&nbsp;&nbsp;{userDetails.email}
-            </span>
-          ) : (
-            <span className="text-light"></span>
-          )}
+          <span className="text-light">Your Cloudnotes</span>
+
           <button
             className="navbar-toggler"
             type="button"
