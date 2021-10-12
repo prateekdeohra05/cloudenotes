@@ -7,7 +7,7 @@ import NoteItem from "./NoteItem";
 export default function Notes(props) {
   let history = useHistory();
   const context = useContext(noteContext);
-  const { notes, getAllNotes, editNote } = context;
+  const { notes, getAllNotes, editNote, getUser } = context;
   const [note, setNote] = useState({
     id: "",
     etitle: "",
@@ -27,6 +27,7 @@ export default function Notes(props) {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       getAllNotes();
+      getUser();
     } else {
       history.push("/login");
     }

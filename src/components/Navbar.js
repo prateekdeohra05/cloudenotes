@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
+import noteContext from "../context/notes/noteContext";
+
 export default function Navbar() {
+  const context = useContext(noteContext);
+  const { userDetails, getUser } = context;
+
   let history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      getUser();
+    } else {
+    }
+    // eslint-disable-next-line
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
+
     history.push("/login");
   };
   const location = useLocation();
@@ -11,9 +26,13 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
-            Navbar
-          </Link>
+          {localStorage.getItem("token") ? (
+            <span className="text-light">
+              {userDetails.name} &nbsp;&nbsp;&nbsp;&nbsp;{userDetails.email}
+            </span>
+          ) : (
+            <span className="text-light"></span>
+          )}
           <button
             className="navbar-toggler"
             type="button"
