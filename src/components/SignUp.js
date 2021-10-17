@@ -2,6 +2,23 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export default function SignUp(props) {
+  const checkPassword = () => {
+    document.getElementById("message").style.display = "none";
+    if (
+      document.getElementById("password").value ===
+      document.getElementById("cpassword").value
+    ) {
+      document.getElementById("signup").disabled = false;
+      document.getElementById("message").style.display = "none";
+    }
+    if (
+      document.getElementById("password").value !==
+      document.getElementById("cpassword").value
+    ) {
+      document.getElementById("signup").disabled = true;
+      document.getElementById("message").style.display = "inline-block";
+    }
+  };
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -84,6 +101,7 @@ export default function SignUp(props) {
             onChange={onChange}
             minLength={5}
             required
+            onKeyUp={checkPassword}
             className="form-control"
             id="password"
             name="password"
@@ -93,18 +111,23 @@ export default function SignUp(props) {
           <label htmlFor="cpassword" className="form-label">
             Confirm Password
           </label>
+          <span className="text-danger" id="message">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Password not
+            matching
+          </span>
           <input
             type="password"
             onChange={onChange}
             required
             className="form-control"
+            onKeyUp={checkPassword}
             minLength={5}
             id="cpassword"
             name="cpassword"
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" id="signup" className="btn btn-primary">
           SignUp
         </button>
       </form>
